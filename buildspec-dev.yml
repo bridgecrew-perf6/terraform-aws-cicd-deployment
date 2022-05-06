@@ -10,7 +10,7 @@ phases:
     commands:
       - sed -i 's/# backend/backend/g' h1-versions.tf
       - sed -i 's/profile =/# profile =/g' h1-versions.tf
-      - terraform init -input=false -backend-config=config-dev.conf
+      - terraform init -backend-config=config-dev.conf
       - terraform validate
       - terraform plan -lock=false -var-file=h0-dev.tfvars
   build:
