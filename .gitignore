@@ -17,4 +17,4 @@ override.tf.json
 
 
 # Ignore the Private Key
-private-key/*
+# private-key/*
