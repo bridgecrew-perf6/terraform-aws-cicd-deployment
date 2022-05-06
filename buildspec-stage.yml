@@ -1,0 +1,20 @@
+version: 0.2
+
+env:
+  variables:
+    TF_COMMAND: "apply"
+    # TF_COMMAND: "destroy"
+
+phases:
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - sed -i 's/# backend/backend/g' h1-versions.tf
+      - sed -i 's/profile =/# profile =/g' h1-versions.tf
+      - terraform init -input=false -backend-config=config-stage.conf
+      - terraform validate
+      - terraform plan -lock=false -var-file=h0-stage.tfvars
+  build:
+    on-failure: ABORT
+    commands:
+      - terraform $TF_COMMAND -var-file=h0-stage.tfvars -auto-approve
