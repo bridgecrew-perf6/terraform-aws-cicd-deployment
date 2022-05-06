@@ -15,4 +15,4 @@ phases:
       - terraform plan -lock=false -var-file=h0-dev.tfvars
   build:
     commands:
-      - terraform "$TF_COMMAND" -var-file=h0-dev.tfvars -auto-approve
+      - terraform $TF_COMMAND -var-file=h0-dev.tfvars -auto-approve
