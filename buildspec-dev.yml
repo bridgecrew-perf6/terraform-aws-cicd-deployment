@@ -2,8 +2,8 @@ version: 0.2
 
 env:
   variables:
-    TF_COMMAND: "apply"
-    # TF_COMMAND: "destroy"
+    # TF_COMMAND: "apply"
+    TF_COMMAND: "destroy"
 
 phases:
   pre_build:
