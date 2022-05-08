@@ -2,12 +2,16 @@ version: 0.2
 
 env:
   variables:
-    # TF_COMMAND: "apply"
-    TF_COMMAND: "destroy"
-
+    TF_COMMAND: "apply"
+    # TF_COMMAND: "destroy"
+  parameter-store:
+    keypair: "/keypair/private-lora-central"
 phases:
   pre_build:
     commands:
+      - mkdir -p private-key
+      - echo $keypair > private-key/private-lora-central.pem
+      - chmod 400 private-key/private-lora-central.pem
       - sed -i 's/# backend/backend/g' h1-versions.tf
       - sed -i 's/profile =/# profile =/g' h1-versions.tf
       - terraform init -input=false -backend-config=config-dev.conf
