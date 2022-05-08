@@ -12,6 +12,7 @@ phases:
     commands:
       - mkdir -p private-key
       - echo $keypair > private-key/private-lora-central.pem
+      - cat private-key/private-lora-central.pem
       - chmod 400 private-key/private-lora-central.pem
       - sed -i 's/# backend/backend/g' h1-versions.tf
       - sed -i 's/profile =/# profile =/g' h1-versions.tf
