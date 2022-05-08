@@ -8,6 +8,7 @@ env:
     keypair: "/keypair/private-lora-central"
 phases:
   pre_build:
+    on-failure: ABORT
     commands:
       - mkdir -p private-key
       - echo $keypair > private-key/private-lora-central.pem
@@ -18,5 +19,6 @@ phases:
       - terraform validate
       - terraform plan -lock=false -var-file=h0-dev.tfvars
   build:
+    on-failure: ABORT
     commands:
       - terraform $TF_COMMAND -var-file=h0-dev.tfvars -auto-approve
