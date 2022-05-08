@@ -2,8 +2,8 @@ version: 0.2
 
 env:
   variables:
-    TF_COMMAND: "apply"
-    # TF_COMMAND: "destroy"
+    # TF_COMMAND: "apply"
+    TF_COMMAND: "destroy"
   parameter-store:
     keypair: "/keypair/private-lora-central"
 phases:
@@ -11,8 +11,7 @@ phases:
     on-failure: ABORT
     commands:
       - mkdir -p private-key
-      - echo $keypair > private-key/private-lora-central.pem
-      - cat private-key/private-lora-central.pem
+      - printf "$keypair" > private-key/private-lora-central.pem
       - chmod 400 private-key/private-lora-central.pem
       - sed -i 's/# backend/backend/g' h1-versions.tf
       - sed -i 's/profile =/# profile =/g' h1-versions.tf
